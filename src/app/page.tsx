@@ -21,6 +21,7 @@ export default function Home() {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [filterType, setFilterType] = useState<string>("all");
 
   useEffect(() => {
     fetchContent();
@@ -102,6 +103,30 @@ export default function Home() {
     }
   };
 
+  const filteredContent =
+    filterType === "all"
+      ? content
+      : content.filter((item) => item.type === filterType);
+
+  const filterOptions = [
+    { value: "all", label: "All Content", count: content.length },
+    {
+      value: "text",
+      label: "Text",
+      count: content.filter((item) => item.type === "text").length,
+    },
+    {
+      value: "image",
+      label: "Images",
+      count: content.filter((item) => item.type === "image").length,
+    },
+    {
+      value: "video",
+      label: "Videos",
+      count: content.filter((item) => item.type === "video").length,
+    },
+  ];
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -143,8 +168,40 @@ export default function Home() {
         </button>
       </div>
 
+      <div className="mb-6">
+        <div className="flex flex-wrap gap-2">
+          {filterOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => setFilterType(option.value)}
+              className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                filterType === option.value
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {option.label}
+              <span
+                className={`ml-2 px-2 py-1 rounded-full text-xs ${
+                  filterType === option.value
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-600"
+                }`}
+              >
+                {option.count}
+              </span>
+            </button>
+          ))}
+        </div>
+        {filterType !== "all" && (
+          <p className="mt-2 text-sm text-gray-600">
+            Showing {filteredContent.length} of {content.length} items
+          </p>
+        )}
+      </div>
+
       <ContentList
-        content={content}
+        content={filteredContent}
         onEdit={handleEditContent}
         onDelete={handleDeleteContent}
       />
