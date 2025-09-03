@@ -132,9 +132,9 @@ export default function ContentForm({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-        <div className="flex items-center justify-between p-6 border-b">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <h3 className="text-lg font-medium">
             {editingContent ? "Edit Content" : "Add New Content"}
           </h3>
@@ -146,7 +146,7 @@ export default function ContentForm({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Title
@@ -217,7 +217,7 @@ export default function ContentForm({
                 />
                 <label
                   htmlFor="file-upload"
-                  className="cursor-pointer text-blue-600 hover:text-blue-800"
+                  className="cursor-pointer text-blue-600 hover:text-blue-800 text-sm"
                 >
                   Choose {formData.type} file
                 </label>
@@ -230,7 +230,7 @@ export default function ContentForm({
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Schedule Date
@@ -262,20 +262,20 @@ export default function ContentForm({
             </div>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 pt-4">
             <button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 cursor-pointer order-2 sm:order-1"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!isDirty && !!editingContent}
-              className={`px-4 py-2 rounded-md ${
+              className={`px-4 py-2 rounded-md order-1 sm:order-2 ${
                 isDirty || !editingContent
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >

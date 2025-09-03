@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import ContentList from "@/components/ContentList";
 import ContentForm from "@/components/ContentForm";
 import { Plus } from "lucide-react";
@@ -129,7 +131,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="min-h-screen bg-gray-50">
         <div className="text-gray-600">Loading...</div>
       </div>
     );
@@ -137,15 +139,23 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="text-red-600 mb-4">Error: {error}</div>
-          <button
-            onClick={fetchContent}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Try Again
-          </button>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1 p-4 sm:p-6">
+            <div className="flex justify-center items-center min-h-96">
+              <div className="text-center">
+                <div className="text-red-600 mb-4">Error: {error}</div>
+                <button
+                  onClick={fetchContent}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          </main>
         </div>
       </div>
     );
@@ -153,15 +163,19 @@ export default function Home() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
-          <p className="text-gray-600">Manage your digital signage content</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            Dashboard
+          </h2>
+          <p className="text-gray-600 text-sm sm:text-base">
+            Manage your digital signage content
+          </p>
         </div>
 
         <button
           onClick={handleAddContent}
-          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer w-full sm:w-auto justify-center"
         >
           <Plus size={16} className="mr-2" />
           Add Content
@@ -174,7 +188,7 @@ export default function Home() {
             <button
               key={option.value}
               onClick={() => setFilterType(option.value)}
-              className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`flex items-center px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
                 filterType === option.value
                   ? "bg-blue-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"

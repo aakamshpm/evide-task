@@ -49,8 +49,8 @@ export default function ContentList({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow">
-      <div className="px-6 py-4 border-b border-gray-200">
+    <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
         <h3 className="text-lg font-medium text-gray-900">Content List</h3>
         <p className="mt-1 text-sm text-gray-500">
           Manage your digital signage content and schedules
@@ -61,16 +61,16 @@ export default function ContentList({
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Content Title
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                 Type
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                 Scheduled Time
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -82,23 +82,33 @@ export default function ContentList({
                 className="hover:bg-gray-50 cursor-pointer"
                 onClick={() => onEdit(item)}
               >
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-4 sm:px-6 py-4">
                   <div className="flex items-center">
                     <div className="mr-3 flex-shrink-0">
                       {getTypeIcon(item.type)}
                     </div>
-                    <span className="text-sm font-medium text-gray-900">
-                      {item.title}
-                    </span>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-sm font-medium text-gray-900 block">
+                        {item.title}
+                      </span>
+                      <span
+                        className={getTypeBadge(item.type) + " mt-1 sm:hidden"}
+                      >
+                        {item.type}
+                      </span>
+                      <span className="text-xs text-gray-500 block sm:hidden mt-1">
+                        {item.scheduledTime}
+                      </span>
+                    </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-4 sm:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
                   <span className={getTypeBadge(item.type)}>{item.type}</span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
                   {item.scheduledTime}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
