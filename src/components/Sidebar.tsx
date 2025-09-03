@@ -9,12 +9,12 @@ export default function Sidebar() {
         <nav>
           <ul className="space-y-2">
             <li>
-              <div className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg font-medium">
+              <div className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg font-medium cursor-pointer">
                 Dashboard
               </div>
             </li>
             <li>
-              <div className="flex items-center px-4 py-2 text-gray-400 rounded-lg">
+              <div className="flex items-center px-4 py-2 text-gray-400 rounded-lg cursor-not-allowed">
                 Content Library
               </div>
             </li>
