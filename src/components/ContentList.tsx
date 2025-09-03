@@ -1,27 +1,24 @@
 import { Image, Video, FileText, File } from "lucide-react";
 
-const mockContent = [
-  {
-    id: 1,
-    title: "Morning Announcement",
-    type: "text",
-    scheduledTime: "2025-09-03 08:00 AM",
-  },
-  {
-    id: 2,
-    title: "Route Update Video",
-    type: "video",
-    scheduledTime: "2025-09-03 10:30 AM",
-  },
-  {
-    id: 3,
-    title: "Safety Poster",
-    type: "image",
-    scheduledTime: "2025-09-03 12:00 PM",
-  },
-];
+interface ContentItem {
+  id: number;
+  title: string;
+  type: string;
+  scheduledTime: string;
+  content?: string;
+}
 
-export default function ContentList() {
+interface ContentListProps {
+  content: ContentItem[];
+  onEdit: (content: ContentItem) => void;
+  onDelete: (id: number) => void;
+}
+
+export default function ContentList({
+  content,
+  onEdit,
+  onDelete,
+}: ContentListProps) {
   const getTypeIcon = (type: string) => {
     const iconProps = { size: 16, className: "text-gray-500" };
 
@@ -79,31 +76,36 @@ export default function ContentList() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {mockContent.map((content) => (
-              <tr key={content.id} className="hover:bg-gray-50 cursor-pointer">
+            {content.map((item) => (
+              <tr
+                key={item.id}
+                className="hover:bg-gray-50 cursor-pointer"
+                onClick={() => onEdit(item)}
+              >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="mr-3 flex-shrink-0">
-                      {getTypeIcon(content.type)}
+                      {getTypeIcon(item.type)}
                     </div>
                     <span className="text-sm font-medium text-gray-900">
-                      {content.title}
+                      {item.title}
                     </span>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={getTypeBadge(content.type)}>
-                    {content.type}
-                  </span>
+                  <span className={getTypeBadge(item.type)}>{item.type}</span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {content.scheduledTime}
+                  {item.scheduledTime}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button className="text-indigo-600 hover:text-indigo-900 mr-3 cursor-pointer">
-                    Edit
-                  </button>
-                  <button className="text-red-600 hover:text-red-900 cursor-pointer">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDelete(item.id);
+                    }}
+                    className="text-red-600 hover:text-red-900 cursor-pointer"
+                  >
                     Delete
                   </button>
                 </td>
