@@ -4,19 +4,26 @@ A content management dashboard built with Next.js for managing digital signage c
 
 ## Steps to Run
 
-1. Install dependencies:
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/aakamshpm/evide-task.git
+   cd evide-task
+   ```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the development server:
+3. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
 ## Features Implemented
 
@@ -39,7 +46,7 @@ A content management dashboard built with Next.js for managing digital signage c
 
 ## Technical Implementation
 
-- Built with Next.js 15.5.2 using App Router
+- Built with Next.js
 - Tailwind CSS for styling
 - Lucide React for icons
 - RESTful API endpoints with full CRUD operations
