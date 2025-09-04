@@ -140,23 +140,13 @@ export default function Home() {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="flex">
-          <Sidebar />
-          <main className="flex-1 p-4 sm:p-6">
-            <div className="flex justify-center items-center min-h-96">
-              <div className="text-center">
-                <div className="text-red-600 mb-4">Error: {error}</div>
-                <button
-                  onClick={fetchContent}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                >
-                  Try Again
-                </button>
-              </div>
-            </div>
-          </main>
-        </div>
+        <div className="text-red-600 mb-4">Error: {error}</div>
+        <button
+          onClick={fetchContent}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        >
+          Try Again
+        </button>
       </div>
     );
   }
